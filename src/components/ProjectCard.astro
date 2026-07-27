@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+const { project } = Astro.props as { project: CollectionEntry<'projects'> };
+const { name, tagline, url, revenue, badge, logo } = project.data;
+const badgeLabel =
+  badge === 'acquired' ? 'Acquired' : badge === 'discontinued' ? 'Discontinued' : null;
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener"
+  class="group flex items-center gap-4 p-4 rounded-xl border border-[var(--color-line)] hover:border-[var(--color-accent)] hover:bg-[#111] transition-colors"
+>
+  <div class="size-11 rounded-lg bg-[#1a1a1a] border border-[var(--color-line)] grid place-items-center text-lg font-bold text-[var(--color-accent)] overflow-hidden shrink-0">
+    {logo ? <img src={logo} alt={`${name} logo`} width="44" height="44" class="size-full object-cover" /> : name.charAt(0)}
+  </div>
+
+  <div class="min-w-0 flex-1">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="font-semibold">{name}</span>
+      {badgeLabel && (
+        <span class={`text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded ${badge === 'acquired' ? 'bg-[var(--color-accent)] text-black' : 'bg-[#222] text-[var(--color-muted)]'}`}>
+          {badgeLabel}
+        </span>
+      )}
+    </div>
+    <p class="text-sm text-[var(--color-muted)] truncate">{tagline}</p>
+  </div>
+
+  <div class="text-right shrink-0">
+    {revenue && (
+      <div class="text-[var(--color-accent)] font-mono text-sm tabular-nums">
+        .{revenue}
+      </div>
+    )}
+  </div>
+</a>

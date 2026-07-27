@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+<Base>
+  <div class="mx-auto max-w-3xl px-6 pt-16 pb-10">
+    <nav class="flex justify-between items-center mb-12 text-sm">
+      <a href="/" class="font-mono text-[var(--color-accent)]">antoniofoti.org</a>
+      <a href="/blog" class="text-[var(--color-muted)] hover:text-[var(--color-accent)] uppercase tracking-wide">Blog</a>
+    </nav>
+
+    <Hero />
+
+    <section class="mt-16">
+      <h2 class="text-xs uppercase tracking-widest text-[var(--color-muted)] mb-4">Projects</h2>
+      <ProjectGrid />
+    </section>
+
+    {posts.length > 0 && (
+      <section class="mt-16">
+        <div class="flex items-baseline justify-between mb-4">
+          <h2 class="text-xs uppercase tracking-widest text-[var(--color-muted)]">Latest writing</h2>
+          <a href="/blog" class="text-sm text-[var(--color-accent)] hover:opacity-80">All posts →</a>
+        </div>
+        <ul class="divide-y divide-[var(--color-line)]">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`} class="flex justify-between gap-4 py-3 group">
+                <span class="group-hover:text-[var(--color-accent)] transition-colors">{post.data.title}</span>
+                <time class="text-sm text-[var(--color-muted)] shrink-0 tabular-nums" datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                </time>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+
+  <Footer />
+</Base>
