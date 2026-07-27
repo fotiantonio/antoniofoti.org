@@ -20,8 +20,8 @@ const meta = statusMeta[status] ?? statusMeta.active;
       {logo && (
         <img src={logo} alt={`${name} icon`} width="24" height="24" class="size-6 rounded object-cover border border-[var(--color-line)] shrink-0" />
       )}
-      <span class="pill">{meta.label}</span>
       <span class="font-semibold truncate">{name}</span>
+      <span class="pill">{meta.label}</span>
     </div>
     {revenue && (
       <span class="text-sm text-[var(--color-accent)] tabular-nums shrink-0">.{revenue}</span>
