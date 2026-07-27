@@ -1,39 +1,33 @@
 ---
+import { site } from '../data/site';
+import { statusMeta } from '../data/site';
 import type { CollectionEntry } from 'astro:content';
 
 const { project } = Astro.props as { project: CollectionEntry<'projects'> };
-const { name, tagline, url, revenue, badge, logo } = project.data;
-const badgeLabel =
-  badge === 'acquired' ? 'Acquired' : badge === 'discontinued' ? 'Discontinued' : null;
+const { name, tagline, url, revenue, status, tech } = project.data;
+const meta = statusMeta[status] ?? statusMeta.active;
 ---
 
 <a
   href={url}
   target="_blank"
   rel="noopener"
-  class="group flex items-center gap-4 p-4 rounded-xl border border-[var(--color-line)] hover:border-[var(--color-accent)] hover:bg-[#111] transition-colors"
+  class="card group block p-4 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)]"
+  style={`--dot: ${meta.dot};`}
 >
-  <div class="size-11 rounded-lg bg-[#1a1a1a] border border-[var(--color-line)] grid place-items-center text-lg font-bold text-[var(--color-accent)] overflow-hidden shrink-0">
-    {logo ? <img src={logo} alt={`${name} logo`} width="44" height="44" class="size-full object-cover" /> : name.charAt(0)}
-  </div>
-
-  <div class="min-w-0 flex-1">
-    <div class="flex items-center gap-2 flex-wrap">
-      <span class="font-semibold">{name}</span>
-      {badgeLabel && (
-        <span class={`text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded ${badge === 'acquired' ? 'bg-[var(--color-accent)] text-black' : 'bg-[#222] text-[var(--color-muted)]'}`}>
-          {badgeLabel}
-        </span>
-      )}
+  <div class="flex items-start justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <span class="pill">{meta.label}</span>
+      <span class="font-semibold truncate">{name}</span>
     </div>
-    <p class="text-sm text-[var(--color-muted)] truncate">{tagline}</p>
+    {revenue && (
+      <span class="text-sm text-[var(--color-accent)] tabular-nums shrink-0">.{revenue}</span>
+    )}
   </div>
 
-  <div class="text-right shrink-0">
-    {revenue && (
-      <div class="text-[var(--color-accent)] font-mono text-sm tabular-nums">
-        .{revenue}
-      </div>
-    )}
+  <p class="mt-2 text-sm text-[var(--color-muted)] truncate">{tagline}</p>
+
+  <div class="mt-3 flex flex-wrap gap-1.5 opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-20 transition-all duration-200 overflow-hidden">
+    {tech.map((t) => <span class="chip">{t}</span>)}
   </div>
 </a>

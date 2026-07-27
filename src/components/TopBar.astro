@@ -1,0 +1,35 @@
+---
+import { site } from '../data/site';
+
+const path = Astro.props.path ?? '';
+const segments = ['~', site.domain, ...path.split('/').filter(Boolean)];
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-[var(--color-line)] bg-[rgba(10,10,10,0.85)] backdrop-blur"
+>
+  <div class="mx-auto max-w-3xl px-6 h-12 flex items-center justify-between">
+    <nav class="flex items-center gap-1 text-sm text-[var(--color-muted)] overflow-hidden">
+      {segments.map((seg, i) => (
+        <>
+          {i > 0 && <span class="text-[var(--color-line)]">/</span>}
+          <a
+            href={i === 1 ? '/' : '#'}
+            class={`hover:text-[var(--color-accent)] transition-colors ${i === segments.length - 1 ? 'text-[var(--color-text)]' : ''}`}
+          >
+            {seg}
+          </a>
+        </>
+      ))}
+    </nav>
+
+    <button
+      type="button"
+      class="hidden sm:flex items-center gap-2 px-2 py-1 rounded-md border border-[var(--color-line)] text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+      aria-label="Command palette (stub)"
+    >
+      <span class="text-xs">⌘</span>
+      <span class="text-xs">K</span>
+    </button>
+  </div>
+</header>

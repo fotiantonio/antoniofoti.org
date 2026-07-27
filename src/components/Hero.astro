@@ -1,11 +1,16 @@
 ---
+import { site } from '../data/site';
 import SocialLinks from './SocialLinks.astro';
 ---
 
-<header class="text-center">
-  <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Antonio Foti</h1>
-  <p class="mt-2 text-[var(--color-muted)]">Indie maker. Shipping things on the internet.</p>
-  <div class="mt-6 flex justify-center">
-    <SocialLinks compact />
+<section class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+  <div>
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">{site.name}</h1>
+    <p class="mt-2 text-[var(--color-muted)] text-sm">
+      <span class="text-[var(--color-accent)]">#</span> {site.bio}
+    </p>
+    <div class="mt-4">
+      <SocialLinks />
+    </div>
   </div>
-</header>
+</section>

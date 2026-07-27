@@ -1,24 +1,16 @@
 ---
-const socials = [
-  { label: 'x', href: 'https://x.com/antoniofoti' },
-  { label: 'github', href: 'https://github.com/antoniofoti' },
-];
+import { site } from '../data/site';
 const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-[var(--color-line)] mt-24">
-  <div class="mx-auto max-w-3xl px-6 py-10 flex flex-col sm:flex-row gap-4 items-center justify-between">
-    <p class="text-sm text-[var(--color-muted)]">
-      © {year} Antonio Foti. Built with Astro.
+  <div class="mx-auto max-w-3xl px-6 py-8 flex flex-col sm:flex-row gap-3 items-center justify-between text-xs">
+    <p class="text-[var(--color-muted)]">
+      <span class="text-[var(--color-accent)]">$</span> exit 0 — © {year} {site.name}
     </p>
-    <nav class="flex gap-4 text-sm">
-      {socials.map((s) => (
-        <a
-          href={s.href}
-          target="_blank"
-          rel="me noopener"
-          class="uppercase tracking-wide text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors"
-        >
+    <nav class="flex flex-wrap gap-2">
+      {site.socials.map((s) => (
+        <a href={s.href} target="_blank" rel="me noopener" class="sochip">
           {s.label}
         </a>
       ))}

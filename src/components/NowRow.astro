@@ -1,0 +1,23 @@
+---
+import { site } from '../data/site';
+const { location, stack, focus } = site.now;
+---
+
+<section class="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[var(--color-line)] border border-[var(--color-line)] rounded-lg overflow-hidden">
+  <div class="bg-[var(--color-bg)] p-4">
+    <div class="text-[0.65rem] uppercase tracking-widest text-[var(--color-muted)]">location</div>
+    <div class="mt-1 text-sm text-[var(--color-accent)]">{location}</div>
+  </div>
+  <div class="bg-[var(--color-bg)] p-4">
+    <div class="text-[0.65rem] uppercase tracking-widest text-[var(--color-muted)]">stack</div>
+    <div class="mt-1 text-sm text-[var(--color-accent)]">
+      {stack.map((s, i) => (
+        <>{i > 0 && <span class="text-[var(--color-muted)]"> · </span>}{s}</>
+      ))}
+    </div>
+  </div>
+  <div class="bg-[var(--color-bg)] p-4">
+    <div class="text-[0.65rem] uppercase tracking-widest text-[var(--color-muted)]">focus</div>
+    <div class="mt-1 text-sm text-[var(--color-accent)]">{focus}</div>
+  </div>
+</section>

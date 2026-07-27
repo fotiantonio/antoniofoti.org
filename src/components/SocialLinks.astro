@@ -1,19 +1,10 @@
 ---
-const socials = [
-  { label: 'x', href: 'https://x.com/antoniofoti' },
-  { label: 'github', href: 'https://github.com/antoniofoti' },
-];
-const { compact = false } = Astro.props;
+import { site } from '../data/site';
 ---
 
-<nav class={`flex gap-4 text-sm ${compact ? '' : 'text-[var(--color-muted)]'}`}>
-  {socials.map((s) => (
-    <a
-      href={s.href}
-      target="_blank"
-      rel="me noopener"
-      class="uppercase tracking-wide hover:text-[var(--color-accent)] transition-colors"
-    >
+<nav class="flex flex-wrap gap-2">
+  {site.socials.map((s) => (
+    <a href={s.href} target="_blank" rel="me noopener" class="sochip">
       {s.label}
     </a>
   ))}

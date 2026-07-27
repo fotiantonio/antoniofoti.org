@@ -1,6 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import TopBar from '../../components/TopBar.astro';
 import Footer from '../../components/Footer.astro';
 
 export async function getStaticPaths() {
@@ -18,25 +19,23 @@ const { title, date, excerpt, tags } = post.data;
 ---
 
 <Base title={`${title} — Antonio Foti`} description={excerpt} path={`/blog/${post.id}/`}>
-  <article>
-    <div class="mx-auto max-w-3xl px-6 pt-16 pb-10">
-      <nav class="flex justify-between items-center mb-12 text-sm">
-        <a href="/" class="font-mono text-[var(--color-accent)]">antoniofoti.org</a>
-        <a href="/blog" class="text-[var(--color-muted)] hover:text-[var(--color-accent)] uppercase tracking-wide">Blog</a>
-      </nav>
+  <TopBar />
 
-      <header class="mb-10">
+  <article>
+    <main class="mx-auto max-w-3xl px-6 pt-12 pb-6">
+      <code class="text-xs text-[var(--color-muted)]">~/{post.id}.mdx</code>
+
+      <header class="mt-3 mb-10">
         <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">{title}</h1>
-        <div class="flex items-center gap-3 mt-3 text-sm text-[var(--color-muted)]">
-          <time datetime={date.toISOString()}>
-            {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </time>
+        <div class="mt-3 text-xs text-[var(--color-muted)]">
+          <span class="text-[var(--color-accent)]">//</span>{' '}
+          published {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           {tags.length > 0 && (
             <>
-              <span>·</span>
-              <ul class="flex gap-2">
-                {tags.map((t) => <li class="text-[var(--color-accent)]">#{t}</li>)}
-              </ul>
+              {' '}·{' '}
+              {tags.map((t, i) => (
+                <>{i > 0 && ' '}<span class="text-[var(--color-accent)]">#{t}</span></>
+              ))}
             </>
           )}
         </div>
@@ -47,8 +46,8 @@ const { title, date, excerpt, tags } = post.data;
       </div>
 
       <hr class="border-[var(--color-line)] my-10" />
-      <a href="/blog" class="text-sm text-[var(--color-accent)] hover:opacity-80">← Back to blog</a>
-    </div>
+      <a href="/blog" class="text-sm text-[var(--color-accent)] hover:opacity-80">← cd ~/blog</a>
+    </main>
 
     <Footer />
   </article>
