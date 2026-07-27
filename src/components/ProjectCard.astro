@@ -43,19 +43,23 @@ const meta = statusMeta[status] ?? statusMeta.active;
 
   <p class="mt-2 text-sm text-[var(--color-muted)] truncate">{tagline}</p>
 
+  {(users || subs) && (
+    <p class="mt-1 text-xs tabular-nums">
+      {users && (
+        <><span class="text-[var(--color-muted)]">free users · </span><span class="text-[var(--color-accent)]">{users}</span></>
+      )}
+      {users && subs && <span class="text-[var(--color-muted)]"> · </span>}
+      {subs && (
+        <><span class="text-[var(--color-muted)]">paid subs · </span><span class="text-[var(--color-accent)]">{subs}</span></>
+      )}
+    </p>
+  )}
+
   {founded && (
     <p class="mt-1 text-xs text-[var(--color-muted)]">
       founded · <time datetime={founded.toISOString()}>
         {founded.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
       </time>
-    </p>
-  )}
-
-  {(users || subs) && (
-    <p class="mt-1 text-xs text-[var(--color-muted)] tabular-nums">
-      {users && <>free users · {users}</>}
-      {users && subs && <> · </>}
-      {subs && <>paid subs · {subs}</>}
     </p>
   )}
 
