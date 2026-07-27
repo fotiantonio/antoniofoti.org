@@ -10,6 +10,7 @@ const projects = defineCollection({
     logo: z.string().optional(),
     revenue: z.string().optional(),
     acquired: z.string().optional(),
+    founded: z.coerce.date().optional(),
     status: z.enum(['active', 'wip', 'sunset', 'acquired', 'discontinued']).default('active'),
     tech: z.array(z.string()).default([]),
     order: z.number().default(99),
