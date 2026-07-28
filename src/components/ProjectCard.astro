@@ -4,7 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 
 const { project } = Astro.props as { project: CollectionEntry<'projects'> };
 const { name, tagline, url, revenue, acquired, founded, users, subs, status, tech, logo } = project.data;
-const meta = statusMeta[status];
+const { dot } = statusMeta[status];
 ---
 
 <a
@@ -12,7 +12,7 @@ const meta = statusMeta[status];
   target="_blank"
   rel="noopener"
   class="card group block p-4 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg)]"
-  style={`--dot: ${meta.dot};`}
+  style={`--dot: ${dot};`}
 >
   <div class="flex items-start justify-between gap-4">
     <div class="flex items-center gap-3 min-w-0">
@@ -20,7 +20,7 @@ const meta = statusMeta[status];
         <img src={logo} alt={`${name} icon`} width="24" height="24" class="size-6 rounded object-cover border border-[var(--color-line)] shrink-0" />
       )}
       <span class="font-semibold truncate">{name}</span>
-      <span class="pill">{meta.label}</span>
+      <span class="pill">{status}</span>
     </div>
     {(revenue || acquired) && (
       <div class="text-right shrink-0 flex flex-col gap-0.5 text-xs">

@@ -1,11 +1,10 @@
 ---
 import '../styles/global.css';
-type OgType = 'website' | 'article' | 'profile';
 interface Props {
   title?: string;
   description?: string;
   path?: string;
-  type?: OgType;
+  type?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;

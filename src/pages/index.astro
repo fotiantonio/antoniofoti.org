@@ -3,14 +3,15 @@ import Base from '../layouts/Base.astro';
 import TopBar from '../components/TopBar.astro';
 import Hero from '../components/Hero.astro';
 import NowRow from '../components/NowRow.astro';
-import ProjectGrid from '../components/ProjectGrid.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import { site } from '../data/site';
+import { posts } from '../data/posts';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+const projects = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const recentPosts = posts.slice(0, 3);
 
 const siteUrl = Astro.site;
 if (!siteUrl) throw new Error('Astro site URL not set');
@@ -44,10 +45,12 @@ const personSchema = {
       <h2 class="text-[0.65rem] uppercase tracking-widest text-[var(--color-muted)] mb-4">
         <span class="text-[var(--color-accent)]">//</span> projects
       </h2>
-      <ProjectGrid />
+      <div class="grid gap-3">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
     </section>
 
-    {posts.length > 0 && (
+    {recentPosts.length > 0 && (
       <section id="writing" class="mt-14">
         <div class="flex items-baseline justify-between mb-4">
           <h2 class="text-[0.65rem] uppercase tracking-widest text-[var(--color-muted)]">
@@ -56,7 +59,7 @@ const personSchema = {
           <a href="/blog" class="text-xs text-[var(--color-muted)] hover:text-[var(--color-accent)]">~/blog →</a>
         </div>
         <ul class="divide-y divide-[var(--color-line)]">
-          {posts.map((post) => (
+          {recentPosts.map((post) => (
             <li>
               <a href={`/blog/${post.id}/`} class="flex justify-between gap-4 py-3 group">
                 <span class="group-hover:text-[var(--color-accent)] transition-colors truncate">

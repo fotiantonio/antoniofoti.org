@@ -13,10 +13,10 @@ export const site = {
   ],
 };
 
-export const statusMeta: Record<string, { label: string; dot: string }> = {
-  active: { label: 'active', dot: '#3fb950' },
-  wip: { label: 'wip', dot: '#d29922' },
-  sunset: { label: 'sunset', dot: '#6e7681' },
-  acquired: { label: 'acquired', dot: '#c6fe1e' },
-  discontinued: { label: 'discontinued', dot: '#f85149' },
+export const statusMeta: Record<string, { dot: string }> = {
+  active: { dot: '#3fb950' },
+  wip: { dot: '#d29922' },
+  sunset: { dot: '#6e7681' },
+  acquired: { dot: '#c6fe1e' },
+  discontinued: { dot: '#f85149' },
 };
