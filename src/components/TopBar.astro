@@ -1,8 +1,5 @@
 ---
 import { site } from '../data/site';
-
-const path = Astro.props.path ?? '';
-const segments = ['~', site.domain, ...path.split('/').filter(Boolean)];
 ---
 
 <header
@@ -10,28 +7,13 @@ const segments = ['~', site.domain, ...path.split('/').filter(Boolean)];
 >
   <div class="mx-auto max-w-3xl px-6 h-12 flex items-center justify-between">
     <nav class="flex items-center gap-1 text-sm text-[var(--color-muted)] overflow-hidden">
-      {segments.map((seg, i) => (
-        <>
-          {i > 0 && <span class="text-[var(--color-line)]">/</span>}
-          <a
-            href={i <= 1 ? '/' : '#'}
-            class={`inline-flex items-center hover:text-[var(--color-accent)] transition-colors ${i === segments.length - 1 ? 'text-[var(--color-text)]' : ''}`}
-          >
-            {i === 0
-              ? <img src="/logo.svg" alt="" width="16" height="16" class="size-4 rounded-sm shrink-0" />
-              : seg}
-          </a>
-        </>
-      ))}
+      <a href="/" class="inline-flex items-center hover:text-[var(--color-accent)] transition-colors">
+        <img src="/logo.svg" alt="" width="16" height="16" class="size-4 rounded-sm shrink-0" />
+      </a>
+      <span class="text-[var(--color-line)]">/</span>
+      <a href="/" class="inline-flex items-center text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors">
+        {site.domain}
+      </a>
     </nav>
-
-    <button
-      type="button"
-      class="hidden sm:flex items-center gap-2 px-2 py-1 rounded-md border border-[var(--color-line)] text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
-      aria-label="Command palette (stub)"
-    >
-      <span class="text-xs">⌘</span>
-      <span class="text-xs">K</span>
-    </button>
   </div>
 </header>

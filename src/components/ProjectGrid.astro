@@ -8,9 +8,4 @@ const projects = (await getCollection('projects', ({ data }) => !data.draft))
 
 <div class="grid gap-3">
   {projects.map((project) => <ProjectCard project={project} />)}
-  {projects.length === 0 && (
-    <p class="text-[var(--color-muted)] text-sm">
-      No projects yet. Add one in <code>src/content/projects/</code>.
-    </p>
-  )}
 </div>

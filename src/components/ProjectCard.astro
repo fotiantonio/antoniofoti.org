@@ -1,11 +1,10 @@
 ---
-import { site } from '../data/site';
 import { statusMeta } from '../data/site';
 import type { CollectionEntry } from 'astro:content';
 
 const { project } = Astro.props as { project: CollectionEntry<'projects'> };
 const { name, tagline, url, revenue, acquired, founded, users, subs, status, tech, logo } = project.data;
-const meta = statusMeta[status] ?? statusMeta.active;
+const meta = statusMeta[status];
 ---
 
 <a

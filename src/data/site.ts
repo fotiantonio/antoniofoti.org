@@ -3,8 +3,8 @@ export const site = {
   domain: 'antoniofoti.org',
   bio: 'indie maker. shipping things on the internet.',
   now: {
-    location: 'Sicily, Italy',
-    stack: ['Astro', 'TypeScript', 'Tailwind'],
+    location: 'Calabria, Italy',
+    stack: ['Arch Linux', 'Opencode', 'GLM 5.2'],
     focus: 'Shipping antoniofoti.org',
   },
   socials: [
@@ -13,13 +13,10 @@ export const site = {
   ],
 };
 
-export const statusMeta: Record<
-  string,
-  { label: string; color: string; dot: string }
-> = {
-  active: { label: 'active', color: '#3fb950', dot: '#3fb950' },
-  wip: { label: 'wip', color: '#d29922', dot: '#d29922' },
-  sunset: { label: 'sunset', color: '#6e7681', dot: '#6e7681' },
-  acquired: { label: 'acquired', color: '#c6fe1e', dot: '#c6fe1e' },
-  discontinued: { label: 'discontinued', color: '#f85149', dot: '#f85149' },
+export const statusMeta: Record<string, { label: string; dot: string }> = {
+  active: { label: 'active', dot: '#3fb950' },
+  wip: { label: 'wip', dot: '#d29922' },
+  sunset: { label: 'sunset', dot: '#6e7681' },
+  acquired: { label: 'acquired', dot: '#c6fe1e' },
+  discontinued: { label: 'discontinued', dot: '#f85149' },
 };
