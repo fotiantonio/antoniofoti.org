@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import SocialLinks from './SocialLinks.astro';
 const year = new Date().getFullYear();
 ---
 
@@ -8,12 +9,6 @@ const year = new Date().getFullYear();
     <p class="text-[var(--color-muted)]">
       <span class="text-[var(--color-accent)]">$</span> exit 0 — © {year} {site.name}
     </p>
-    <nav class="flex flex-wrap gap-2">
-      {site.socials.map((s) => (
-        <a href={s.href} target="_blank" rel="me noopener" class="sochip">
-          {s.label}
-        </a>
-      ))}
-    </nav>
+    <SocialLinks />
   </div>
 </footer>

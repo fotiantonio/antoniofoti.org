@@ -6,7 +6,7 @@ const {
   path = '',
 } = Astro.props;
 
-const url = Astro.site ?? 'https://antoniofoti.org';
+const url = Astro.site;
 const canonical = new URL(path || Astro.url.pathname, url).toString();
 const og = new URL('/og-default.png', url).toString();
 ---
