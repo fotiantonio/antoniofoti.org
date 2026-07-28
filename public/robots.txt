@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://antoniofoti.org/sitemap-index.xml

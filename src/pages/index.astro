@@ -6,13 +6,31 @@ import NowRow from '../components/NowRow.astro';
 import ProjectGrid from '../components/ProjectGrid.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
+import { site } from '../data/site';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
+
+const siteUrl = Astro.site;
+if (!siteUrl) throw new Error('Astro site URL not set');
+const homeUrl = siteUrl.toString();
+const ogImage = new URL('/og-default.png', siteUrl).toString();
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: homeUrl,
+  image: ogImage,
+  jobTitle: 'Indie Maker',
+  description: site.bio,
+  address: { '@type': 'PostalAddress', addressLocality: site.now.location },
+  knowsAbout: site.now.stack,
+  sameAs: site.socials.map((s) => s.href),
+};
 ---
 
-<Base>
+<Base schema={personSchema}>
   <TopBar />
 
   <main class="mx-auto max-w-3xl px-6 pt-12 pb-6">

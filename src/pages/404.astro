@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import TopBar from '../components/TopBar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="404 — Antonio Foti" description="Page not found." path="/404">
+  <TopBar />
+
+  <main class="mx-auto max-w-3xl px-6 pt-24 pb-6 text-center">
+    <code class="text-xs text-[var(--color-muted)]">~/404</code>
+    <h1 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+      <span class="text-[var(--color-accent)]">$</span> exit 1
+    </h1>
+    <p class="mt-3 text-sm text-[var(--color-muted)]">No such file or directory.</p>
+    <a href="/" class="inline-block mt-6 text-sm text-[var(--color-accent)] hover:opacity-80">← cd ~</a>
+  </main>
+
+  <Footer />
+</Base>
