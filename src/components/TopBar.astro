@@ -14,10 +14,12 @@ const segments = ['~', site.domain, ...path.split('/').filter(Boolean)];
         <>
           {i > 0 && <span class="text-[var(--color-line)]">/</span>}
           <a
-            href={i === 1 ? '/' : '#'}
-            class={`hover:text-[var(--color-accent)] transition-colors ${i === segments.length - 1 ? 'text-[var(--color-text)]' : ''}`}
+            href={i <= 1 ? '/' : '#'}
+            class={`inline-flex items-center hover:text-[var(--color-accent)] transition-colors ${i === segments.length - 1 ? 'text-[var(--color-text)]' : ''}`}
           >
-            {seg}
+            {i === 0
+              ? <img src="/logo.svg" alt="" width="16" height="16" class="size-4 rounded-sm shrink-0" />
+              : seg}
           </a>
         </>
       ))}
