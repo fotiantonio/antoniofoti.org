@@ -1,0 +1,267 @@
+---
+
+title: How I Pay Bills from the Beach with Termux + Pi Agent
+date: 2026-07-28
+excerpt: My complete mobile development setup using Termux and Pi Agent to code from anywhere.
+tags: [android, termux, pi-agent, mobile-development, terminal, github, remote-work]
+
+--------
+
+My development setup is simple:
+
+* Android phone
+* Termux
+* Pi Agent
+* GitHub
+
+No laptop. No remote desktop. Just a terminal.
+
+## Prerequisites
+
+* Android smartphone
+* Internet connection
+* GitHub account
+
+---
+
+## 1. Install Termux
+
+Install Termux from Play store or F-Droid and open it.
+
+Update the system:
+
+```bash
+pkg update && pkg upgrade
+```
+
+---
+
+## 2. Install the required packages
+
+```bash
+pkg install git nodejs openssh termux-api
+```
+
+These provide:
+
+* `git` for version control
+* `node` and `npm` for Pi Agent
+* `openssh` for GitHub access
+* `termux-api` for Android integration
+
+---
+
+## 3. Allow storage access (Optional)
+
+```bash
+termux-setup-storage
+```
+
+This creates access to shared storage:
+
+```
+/storage/emulated/0
+```
+
+---
+
+## 4. Install Pi Agent
+
+```bash
+npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+```
+
+Verify the installation:
+
+```bash
+pi --version
+```
+
+---
+
+## 5. Create the agent configuration directory
+
+```bash
+mkdir -p ~/.pi/agent
+```
+
+---
+
+## 6. Create `AGENTS.md`
+
+```bash
+vi ~/.pi/agent/AGENTS.md
+```
+
+Press "I" and paste:
+
+````markdown
+# Agent Environment: Termux on Android
+
+## Environment
+
+- OS: Android
+- Terminal: Termux
+- Home: `/data/data/com.termux/files/home`
+- Prefix: `/data/data/com.termux/files/usr`
+- Shared storage: `/storage/emulated/0`
+
+## Open URLs
+
+```bash
+termux-open-url "https://example.com"
+```
+
+## Open Files
+
+```bash
+termux-open file.pdf
+termux-open --chooser image.jpg
+```
+
+## Clipboard
+
+```bash
+termux-clipboard-set "text"
+termux-clipboard-get
+```
+
+## Notifications
+
+```bash
+termux-notification -t "Title" -c "Content"
+```
+
+## Device Information
+
+```bash
+termux-battery-status
+termux-wifi-connectioninfo
+termux-telephony-deviceinfo
+```
+
+## Sharing
+
+```bash
+termux-share -a send file.txt
+```
+
+## Useful Commands
+
+```bash
+termux-toast "Done"
+termux-vibrate
+termux-tts-speak "Hello"
+termux-camera-photo photo.jpg
+```
+
+## Notes
+
+- Install the Termux:API app.
+- Install the `termux-api` package.
+- Run `termux-setup-storage` for shared storage access.
+````
+
+Save and quit:
+
+```
+Esc
+:wq
+```
+
+---
+
+## 7. Start Pi Agent
+
+```bash
+pi
+```
+
+The first launch will guide you through the initial configuration.
+
+---
+
+## 8. Configure GitHub
+
+Generate an SSH key:
+
+```bash
+ssh-keygen -t ed25519
+```
+
+Display the public key:
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+Add it to your GitHub account.
+
+Test the connection:
+
+```bash
+ssh -T git@github.com
+```
+
+---
+
+## 9. Clone a project
+
+```bash
+git clone git@github.com:username/repository.git
+```
+
+```bash
+cd repository
+```
+
+---
+
+## 10. Start coding
+
+Launch Pi Agent:
+
+```bash
+pi
+```
+
+From the terminal you can:
+
+* edit code
+* run commands
+* create commits
+* push to GitHub
+* review pull requests
+* work entirely from your phone
+
+---
+
+## Why This Setup
+
+* Always with me.
+* Starts in seconds.
+* Uses little battery.
+* No laptop required.
+* Works anywhere with an internet connection.
+
+I've used it from:
+
+* the beach
+* trains
+* cafés
+* airports
+* hotel rooms
+
+---
+
+## Conclusion
+
+Modern Android phones are powerful enough for many development tasks.
+
+With Termux, Git, and Pi Agent, a phone becomes a portable development machine.
+
+One phone.
+
+One terminal.
+
+Code anywhere.
