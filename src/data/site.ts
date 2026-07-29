@@ -5,7 +5,7 @@ export const site = {
   now: {
     location: 'Calabria, Italy',
     stack: ['Arch Linux', 'Opencode', 'GLM 5.2'],
-    focus: 'Shipping antoniofoti.org',
+    focus: 'Shipping tts.audio',
   },
   socials: [
     { label: 'x', href: 'https://x.com/antoniofoti' },

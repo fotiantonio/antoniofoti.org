@@ -1,7 +1,7 @@
 ---
 name: flowsub.ai
 tagline: AI generates studio-quality subtitles in minutes.
-url: https://yourproject.com
+url: https://flowsub.ai
 status: acquired            # active | wip | sunset | acquired | discontinued
 tech:                     # shown on hover
   - TypeScript
